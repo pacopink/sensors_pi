@@ -13,7 +13,7 @@ def get_data_from_sensor():
         return x
 
 last = 0
-INTERVAL=10 #5min记录一次
+INTERVAL=60 #5min记录一次
 while True:
     now = int(time.time())
     if now%INTERVAL<3 and now-last>=INTERVAL:

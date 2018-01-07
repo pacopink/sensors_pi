@@ -23,7 +23,7 @@ if False:
 
 if True:
     #PWM
-    freq = 2000 #4000Hz
+    freq = 4000 #4000Hz
     p = GPIO.PWM(LED_PIN, freq)
     p.start(0)
     try:
@@ -40,6 +40,5 @@ if True:
                 p.ChangeDutyCycle(dutyCycle)
                 #p.ChangeFrequency(2000)
                 time.sleep(1)
-
     except:
         p.stop()

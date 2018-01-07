@@ -30,7 +30,7 @@ uint8 waitFor(uint8 target)
     while(digitalRead(pinNumber)!=target) {
         wait_counter++;
         delayMicroseconds(1);
-        if (wait_counter>=2048) { 
+        if (wait_counter>=2000) { 
             return 0;
         }
     }
@@ -87,7 +87,7 @@ uint8 readSensorData(void)
 //做10次获取尝试,任一次成功都返回
 int readSensorCycle() {
     uint8 retry = 10;
-    for(retry; retry--; retry>0) {
+    for(;retry>0; retry--) {
         if (readSensorData()) {
             //如果成功，立即返回
             return 1;
