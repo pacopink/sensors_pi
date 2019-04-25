@@ -42,9 +42,9 @@ uint8 readSensorData(void)
     uint8 i;
 
     pinMode(pinNumber,OUTPUT); // set mode to output
-    digitalWrite(pinNumber, LOW); // output a high level 
+    digitalWrite(pinNumber, LOW); // output a low level 
     delay(20);
-    digitalWrite(pinNumber, HIGH); // output a low level 
+    digitalWrite(pinNumber, HIGH); // output a high level 
     pinMode(pinNumber, INPUT); // set mode to input
 
     delayMicroseconds(27);
@@ -132,6 +132,8 @@ int main (int argc, char* argv[])
                 return 0;
             }
             delay(interval*1000);
+        } else {
+            printf("failed: %d,%d\n", *r1, *t1);
         }
         databuf=0;
         crc=0;

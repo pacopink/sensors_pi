@@ -44,16 +44,20 @@ pwm_vars = dict()
 def on_update_pwm():
     print "on_update_pwm"
     for k,v in pwm_vars.items():
-        r.set(k, v.get())
+        try:
+            r.set(k, float(v.get()))
+        except Exception,e:
+            print e
 
 btnPWM  = Button(window, text="update", command=on_update_pwm)
 
 def init_pwm(keys):
     global row
     for i in keys:
+        key_pair = (i, i.replace('freq', 'duty'))
         col = 0
         for j in xrange(0,2):
-            key = i[j]
+            key = key_pair[j]
             print key
             val = r.get(key)
             l = Label(window, text=key + (" (Hz)" if j==0 else " (%)"))
@@ -83,10 +87,10 @@ def on_config():
     print r.ping()
 
     if not pwm_init_flag:
-        init_pwm(zip(r.keys('*:freq'), r.keys('*:duty')))
+        init_pwm(r.keys('*:freq'))
 
 
-btn = Button(window, text="ok", command=on_config)
+btn = Button(window, text="load PWM", command=on_config)
 btn.grid(column=0, row=row)
 row+=1
 
